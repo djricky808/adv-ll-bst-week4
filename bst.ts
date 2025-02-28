@@ -21,6 +21,32 @@ export class BST {
   // EASY: Insert a value into the BST
   insert(value: number): void {
     // TODO: Implement insert method
+    if (this.root === null) {
+      this.root = new BSTNode(value);
+      return;
+    } else {
+      function searchTree(node) {
+        if (value < node.value) {
+          if (node.left === null) {
+            node.left = new BSTNode(value);
+            return;
+          } else {
+            return searchTree(node.left);
+          }
+        } else if (value > node.value) {
+          if (node.right === null) {
+            node.right = new BSTNode(value);
+            return;
+          } else {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      }
+      console.log(bst.root);
+      searchTree(bst.root);
+    }
   }
 
   // EASY: Check if a value exists in the BST
@@ -64,8 +90,10 @@ bst.insert(7);
 bst.insert(13);
 bst.insert(17);
 
-console.log("BST Contains 7:", bst.contains(7)); // Expected: true
-console.log("BST Min Value:", bst.findMin()); // Expected: 3
-console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
-console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)
-console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)
+console.log(bst);
+
+// console.log("BST Contains 7:", bst.contains(7)); // Expected: true
+// console.log("BST Min Value:", bst.findMin()); // Expected: 3
+// console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
+// console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)
+// console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)

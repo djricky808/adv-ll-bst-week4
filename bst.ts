@@ -82,7 +82,17 @@ export class BST {
   // MEDIUM: Find the maximum depth of the BST
   maxDepth(): number {
     // TODO: Implement maxDepth method
-    return 0;
+    let current = this.root;
+
+    const depth = (current) => {
+      if (current === null) {
+        return -1;
+      }
+      let leftHeight = depth(current.left);
+      let rightHeight = depth(current.right);
+      return Math.max(leftHeight, rightHeight) + 1;
+    };
+    return depth(current);
   }
 
   // MEDIUM: Depth-First Search (DFS) Traversal
@@ -112,6 +122,6 @@ console.log(bst);
 
 console.log("BST Contains 7:", bst.contains(7)); // Expected: true
 console.log("BST Min Value:", bst.findMin()); // Expected: 3
-// console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
+console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
 // console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)
 // console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)

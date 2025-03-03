@@ -52,13 +52,31 @@ export class BST {
   // EASY: Check if a value exists in the BST
   contains(value: number): boolean {
     // TODO: Implement contains method
+    let current = this.root;
+    while (current) {
+      if (value === current.value) {
+        return true;
+      }
+      if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
     return false;
   }
 
   // MEDIUM: Find the minimum value in the BST
   findMin(): number | null {
     // TODO: Implement findMin method
-    return null;
+    let current = this.root;
+    if (current === null) {
+      return null;
+    }
+    while (current.left !== null) {
+      current = current.left;
+    }
+    return current.value;
   }
 
   // MEDIUM: Find the maximum depth of the BST
@@ -92,8 +110,8 @@ bst.insert(17);
 
 console.log(bst);
 
-// console.log("BST Contains 7:", bst.contains(7)); // Expected: true
-// console.log("BST Min Value:", bst.findMin()); // Expected: 3
+console.log("BST Contains 7:", bst.contains(7)); // Expected: true
+console.log("BST Min Value:", bst.findMin()); // Expected: 3
 // console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
 // console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)
 // console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)

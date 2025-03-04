@@ -98,7 +98,18 @@ export class BST {
   // MEDIUM: Depth-First Search (DFS) Traversal
   dfs(): number[] {
     // TODO: Implement DFS traversal
-    return [];
+    let preOrder: number[] = [];
+    let current = this.root;
+    function pushNodeInOrder(node) {
+      if (node === null) {
+        return;
+      }
+      pushNodeInOrder(node.left);
+      preOrder.push(node.value);
+      pushNodeInOrder(node.right);
+    }
+    pushNodeInOrder(current);
+    return preOrder;
   }
 
   // MEDIUM: Breadth-First Search (BFS) Traversal
@@ -123,5 +134,5 @@ console.log(bst);
 console.log("BST Contains 7:", bst.contains(7)); // Expected: true
 console.log("BST Min Value:", bst.findMin()); // Expected: 3
 console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
-// console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)
+console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)- Pre-Order Traversal
 // console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)

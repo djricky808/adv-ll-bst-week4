@@ -68,9 +68,7 @@ export class LinkedList {
         next = current.next;
         current.next = previous;
         previous = current;
-        console.log("previous = ", previous);
         current = next;
-        console.log(linkedList);
       }
       list.head = previous;
     }
@@ -105,10 +103,10 @@ linkedList.append(5);
 
 // console.log(linkedList);
 
-// console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
+console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
 linkedList.reverse();
 console.log("Linked List", linkedList);
 console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
-// linkedList.remove(3);
-// console.log(linkedList);
-// console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false
+linkedList.remove(3);
+console.log(linkedList);
+console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false

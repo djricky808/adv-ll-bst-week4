@@ -38,7 +38,21 @@ export class LinkedList {
   // EASY: Find a value in the list
   find(value: number): boolean {
     // TODO: Implement find method
-    return false;
+    let valueFound = false;
+    function findNode(node) {
+      if (node.value === null) {
+        valueFound = false;
+        return;
+      } else if (node.value === value) {
+        valueFound = true;
+        return;
+      } else {
+        console.log("Moving on", node.next.value);
+        findNode(node.next);
+      }
+    }
+    findNode(this.head);
+    return valueFound;
   }
 
   // MEDIUM: Reverse the linked list
@@ -61,7 +75,7 @@ linkedList.append(5);
 
 console.log(linkedList);
 
-// console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
+console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
 // linkedList.reverse();
 // console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
 // linkedList.remove(3);

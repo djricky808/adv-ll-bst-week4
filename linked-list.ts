@@ -19,6 +19,20 @@ export class LinkedList {
   // EASY: Append a value to the end of the list
   append(value: number): void {
     // TODO: Implement append method
+    if (this.head === null) {
+      this.head = new ListNode(value);
+      return;
+    } else {
+      function findEnd(node: ListNode) {
+        if (node.next === null) {
+          node.next = new ListNode(value);
+          return;
+        } else {
+          return findEnd(node.next);
+        }
+      }
+      findEnd(this.head);
+    }
   }
 
   // EASY: Find a value in the list
@@ -45,8 +59,10 @@ linkedList.append(3);
 linkedList.append(4);
 linkedList.append(5);
 
-console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
-linkedList.reverse();
-console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
-linkedList.remove(3);
-console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false
+console.log(linkedList);
+
+// console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
+// linkedList.reverse();
+// console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
+// linkedList.remove(3);
+// console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false

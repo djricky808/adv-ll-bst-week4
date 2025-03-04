@@ -59,25 +59,22 @@ export class LinkedList {
   // MEDIUM: Reverse the linked list
   reverse(): void {
     // TODO: Implement reverse method
-    let head = linkedList;
-    console.log("start", head);
-    function reverseNodes(head): void {
-      let current: ListNode | null = head.head;
+    let list = linkedList;
+    function reverseNodes(list): void {
+      let current: ListNode | null = list.head;
       let previous: ListNode | null = null;
       let next: ListNode | null;
       while (current !== null) {
         next = current.next;
-
         current.next = previous;
-
         previous = current;
-
+        console.log("previous = ", previous);
         current = next;
+        console.log(linkedList);
       }
-
-      return;
+      list.head = previous;
     }
-    reverseNodes(head);
+    reverseNodes(list);
   }
 
   // MEDIUM: Remove a node by value
@@ -112,6 +109,6 @@ linkedList.append(5);
 linkedList.reverse();
 console.log("Linked List", linkedList);
 console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
-linkedList.remove(3);
-console.log(linkedList);
-console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false
+// linkedList.remove(3);
+// console.log(linkedList);
+// console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false

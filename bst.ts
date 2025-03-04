@@ -99,7 +99,6 @@ export class BST {
   dfs(): number[] {
     // TODO: Implement DFS traversal
     // let inOrder: number[] = [];
-    // let current = this.root;
     // function pushNodeInOrder(node) {
     //   if (node === null) {
     //     return;
@@ -108,25 +107,50 @@ export class BST {
     //   inOrder.push(node.value);
     //   pushNodeInOrder(node.right);
     // }
-    // pushNodeInOrder(current);
+    // pushNodeInOrder(this.root);
     // return inOrder;
 
-    let preOrder: number[] = [];
-    function pushPreOrder(node: BSTNode | null) {
-      if (node) {
-        preOrder.push(node.value);
-        pushPreOrder(node.left);
-        pushPreOrder(node.right);
+    // let preOrder: number[] = [];
+    // function pushPreOrder(node: BSTNode | null) {
+    //   if (node) {
+    //     preOrder.push(node.value);
+    //     pushPreOrder(node.left);
+    //     pushPreOrder(node.right);
+    //   }
+    // }
+    // pushPreOrder(this.root);
+    // return preOrder;
+
+    let postOrder: number[] = [];
+    function pushPostOrder(node: BSTNode | null) {
+      if (node === null) {
+        return;
       }
+      pushPostOrder(node.left);
+      pushPostOrder(node.right);
+      postOrder.push(node.value);
     }
-    pushPreOrder(this.root);
-    return preOrder;
+    pushPostOrder(this.root);
+    return postOrder;
   }
 
   // MEDIUM: Breadth-First Search (BFS) Traversal
   bfs(): number[] {
     // TODO: Implement BFS traversal
-    return [];
+    let breadth: number[][] = [];
+    function levelOrder(node, level) {
+      if (!node) {
+        return;
+      }
+      if (breadth.length <= level) {
+        breadth.push([]);
+      }
+      breadth[level].push(node.value);
+      levelOrder(node.left, level + 1);
+      levelOrder(node.right, level + 1);
+    }
+    levelOrder(this.root, 0);
+    return breadth.flat();
   }
 }
 
@@ -146,4 +170,4 @@ console.log("BST Contains 7:", bst.contains(7)); // Expected: true
 console.log("BST Min Value:", bst.findMin()); // Expected: 3
 console.log("BST Max Depth:", bst.maxDepth()); // Expected: 2
 console.log("BST DFS Traversal:", bst.dfs()); // Expected: [10, 5, 3, 7, 15, 13, 17] (or similar)- Pre-Order Traversal
-// console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)
+console.log("BST BFS Traversal:", bst.bfs()); // Expected: [10, 5, 15, 3, 7, 13, 17] (or similar)

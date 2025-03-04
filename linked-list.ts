@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 // Linked List Implementation
 export class ListNode {
   value: number;
@@ -40,14 +42,13 @@ export class LinkedList {
     // TODO: Implement find method
     let valueFound = false;
     function findNode(node) {
-      if (node.value === null) {
+      if (node === null) {
         valueFound = false;
         return;
       } else if (node.value === value) {
         valueFound = true;
         return;
       } else {
-        console.log("Moving on", node.next.value);
         findNode(node.next);
       }
     }
@@ -58,11 +59,43 @@ export class LinkedList {
   // MEDIUM: Reverse the linked list
   reverse(): void {
     // TODO: Implement reverse method
+    let head = linkedList;
+    console.log("start", head);
+    function reverseNodes(head): void {
+      let current: ListNode | null = head.head;
+      let previous: ListNode | null = null;
+      let next: ListNode | null;
+      while (current !== null) {
+        next = current.next;
+
+        current.next = previous;
+
+        previous = current;
+
+        current = next;
+      }
+
+      return;
+    }
+    reverseNodes(head);
   }
 
   // MEDIUM: Remove a node by value
   remove(value: number): void {
     // TODO: Implement remove method
+    function deleteNode(node, value) {
+      if (node.next.value === value) {
+        console.log(node);
+        let followingNode = node.next.next;
+        console.log(followingNode);
+        node.next = followingNode;
+        console.log(node.next);
+        return;
+      } else {
+        return deleteNode(node.next, value);
+      }
+    }
+    deleteNode(this.head, value);
   }
 }
 
@@ -73,10 +106,12 @@ linkedList.append(3);
 linkedList.append(4);
 linkedList.append(5);
 
-console.log(linkedList);
+// console.log(linkedList);
 
-console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
-// linkedList.reverse();
-// console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
-// linkedList.remove(3);
-// console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false
+// console.log("Linked List Find 3:", linkedList.find(3)); // Expected: true
+linkedList.reverse();
+console.log("Linked List", linkedList);
+console.log("Linked List Reversed Find 3:", linkedList.find(3)); // Expected: true
+linkedList.remove(3);
+console.log(linkedList);
+console.log("Linked List Find 3 After Removal:", linkedList.find(3)); // Expected: false

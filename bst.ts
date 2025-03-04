@@ -98,17 +98,28 @@ export class BST {
   // MEDIUM: Depth-First Search (DFS) Traversal
   dfs(): number[] {
     // TODO: Implement DFS traversal
+    // let inOrder: number[] = [];
+    // let current = this.root;
+    // function pushNodeInOrder(node) {
+    //   if (node === null) {
+    //     return;
+    //   }
+    //   pushNodeInOrder(node.left);
+    //   inOrder.push(node.value);
+    //   pushNodeInOrder(node.right);
+    // }
+    // pushNodeInOrder(current);
+    // return inOrder;
+
     let preOrder: number[] = [];
-    let current = this.root;
-    function pushNodeInOrder(node) {
-      if (node === null) {
-        return;
+    function pushPreOrder(node: BSTNode | null) {
+      if (node) {
+        preOrder.push(node.value);
+        pushPreOrder(node.left);
+        pushPreOrder(node.right);
       }
-      pushNodeInOrder(node.left);
-      preOrder.push(node.value);
-      pushNodeInOrder(node.right);
     }
-    pushNodeInOrder(current);
+    pushPreOrder(this.root);
     return preOrder;
   }
 
